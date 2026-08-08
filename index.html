@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURITY WARNING</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #0d1117;
+            color: #58a6ff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        .card {
+            background: #161b22;
+            border: 2px solid #30363d;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: none; /* Hidden until popups finish */
+        }
+        h1 {
+            color: #f85149;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #c9d1d9;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e3b341;
+            margin: 15px 0;
+        }
+        .reveal-btn {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .reveal-btn:hover {
+            background: #2ea043;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="prankCard">
+        <h1>⚠️ CRITICAL SYSTEM ALERT</h1>
+        <p>Your browsing logs have been forwarded to: <br><strong id="friendGroup">[Group Chat Name]</strong></p>
+        <p>Data wipe initiating in...</p>
+        <div class="timer" id="countdown">10</div>
+        <p id="subtext" style="font-size: 0.9rem; color: #8b949e;">Do not close this tab or your IP will be logged.</p>
+        <button class="reveal-btn" onclick="finalJoke()">CANCEL TRANSACTIONS</button>
+    </div>
+
+    <script>
+        // 1. Customize your series of pop-up messages here:
+        const messages = [
+            "⚠️ WARNING: Unsafe device detected.",
+            "Analyzing browser history...",
+            "Searching for embarrassing photos...",
+            "Found 47 incriminating selfies.",
+            "Uploading files to global database...",
+            "Are you sure you want to stop this upload?",
+            "Access Denied. Upload proceeding at 99%...",
+            "Just kidding! 😜"
+        ];
+
+        // 2. Loop through all popups sequentially
+        function runPopups() {
+            for (let i = 0; i < messages.length; i++) {
+                alert(messages[i]);
+            }
+            // Show the main prank card after popups end
+            document.getElementById('prankCard').style.display = 'block';
+            startCountdown();
+        }
+
+        // 3. Countdown timer logic
+        function startCountdown() {
+            let timeLeft = 10;
+            const timerEl = document.getElementById('countdown');
+            
+            const interval = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    finalJoke();
+                }
+            }, 1000);
+        }
+
+        // 4. The punchline when time runs out or they click the button
+        function finalJoke() {
+            document.getElementById('prankCard').innerHTML = `
+                <h1 style="color: #2ea043;">Gotcha! 🤡</h1>
+                <p style="font-size: 1.3rem;">You actually fell for that?</p>
+                <p>Send this link to someone else to pass on the paranoia.</p>
+            `;
+        }
+
+        // Run the sequence as soon as the window loads
+        window.onload = runPopups;
+    </script>
+</body>
+</html>
